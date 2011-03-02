@@ -1,3 +1,5 @@
 Hark Data
 
 Contains the sqlite database of hark users and audio metadata.
+
+To create this file, run from project root: python manage.py syncdb
