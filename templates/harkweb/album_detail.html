@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>{{ album.artist }} - {{ album.name }}</title>
+    <link href='{{ MEDIA_URL }}hark.css' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911'
+     rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet'
+     type='text/css' />
+    <script type='text/javascript'
+     src='https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js'>
+    </script>
+    <script type='text/javascript' src='{{ MEDIA_URL }}audiojs/audio.js'>
+    </script>
+    <script type='text/javascript' src='{{ MEDIA_URL }}hark.js'></script>
+</head>
+<body>
+    <header>
+        <h1>{{ album.artist }}</h1>
+        <h2>{{ album.name }}</h2>
+    </header>
+    <article>
+        <div id='player'>
+            <audio></audio>
+        </div>
+        {% ifnotequal album.song_set.count 0 %}
+        <ol>
+            {% for song in album.song_set.all %}
+            <li>
+                <span class='songname'>{{ song.name }}</span>
+                <span class='formats'>
+                    <a href='mp3/{{ song.filename }}.mp3'>mp3</a>
+                    <a href='ogg/{{ song.filename }}.ogg'>ogg</a>
+                    <a href='flac/{{ song.filename }}.flac'>flac</a>
+                </span>
+            </li>
+            {% endfor %}
+        </ol>
+        {% else %}
+        <p>No songs available.</p>
+        {% endifnotequal %}
+    </article>
+    <footer>
+        <p>
+            Download full album in:
+            <a href='mp3/{{ album.artist }} - {{ album.name }}.tar'>mp3</a>,
+            <a href='ogg/{{ album.artist }} - {{ album.name }}.tar'>ogg</a>,
+            or
+            <a href='flac/{{ album.artist }} - {{ album.name }}.tar'>flac</a>.
+        </p>
+    </footer>
+</body>
+</html>
