@@ -11,6 +11,6 @@ album_info = {
 
 urlpatterns = patterns('',
     (r'^$', list_detail.object_list, album_info),
-    (r'^([\w-]+)/$', albums_by_artist),
-    (r'^([\w-]+)/([\w-]+)/$', album_detail),
+    (r'^([\w]+)/$', albums_by_artist),
+    (r'^([\w]+)/([\w]+)/$', album_detail),
 )

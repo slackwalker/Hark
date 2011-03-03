@@ -3,7 +3,7 @@ from django.views.generic import list_detail
 from hark.harkweb.models import Artist, Album
 
 def albums_by_artist(request, artistname):
-    artistname = artistname.replace('-', ' ')
+    artistname = artistname.replace('_', ' ')
     try:
         artist = Artist.objects.get(name__iexact=artistname)
     except Artist.DoesNotExist:
@@ -17,13 +17,13 @@ def albums_by_artist(request, artistname):
     )
 
 def album_detail(request, artistname, albumname):
-    artistname = artistname.replace('-', ' ')
+    artistname = artistname.replace('_', ' ')
     try:
         artist = Artist.objects.get(name__iexact = artistname)
     except Artist.DoesNotExist:
         raise Http404
 
-    albumname = albumname.replace('-', ' ')
+    albumname = albumname.replace('_', ' ')
     try:
         album = Album.objects.get(
             name__iexact = albumname,

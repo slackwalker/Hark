@@ -1,3 +1,4 @@
+{% load harkweb_extras %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +28,7 @@
         <ul>
             {% for album in album_list %}
             <li>
-                <a href="/{{ album.artist.name|slugify }}/{{ album.name|slugify }}/">{{ album.fullname }}</a>
+                <a href="/{{ album.artist.name|harkify|slugify }}/{{ album.name|harkify|slugify }}/">{{ album.fullname }}</a>
             </li>
             {% endfor %}
         </ul>
