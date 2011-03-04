@@ -28,7 +28,7 @@
         <ul>
             {% for album in album_list %}
             <li>
-                <a href="/{{ album.artist.name|harkify|slugify }}/{{ album.name|harkify|slugify }}/">{{ album.fullname }}</a>
+                <a href="/{{ album.urlpath }}">{{ album.fullname }}</a>
             </li>
             {% endfor %}
         </ul>

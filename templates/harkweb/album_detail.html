@@ -30,9 +30,9 @@
             <li>
                 <span class='songname'>{{ song.name }}</span>
                 <span class='formats'>
-                    <a href='mp3/{{ song.filename }}.mp3'>mp3</a>
-                    <a href='ogg/{{ song.filename }}.ogg'>ogg</a>
-                    <a href='flac/{{ song.filename }}.flac'>flac</a>
+                    <a href='{{ MEDIA_URL }}albums/{{ album.urlpath }}mp3/{{ song.urlname }}.mp3'>mp3</a>
+                    <a href='{{ MEDIA_URL }}albums/{{ album.urlpath }}ogg/{{ song.urlname }}.ogg'>ogg</a>
+                    <a href='{{ MEDIA_URL }}albums/{{ album.urlpath }}flac/{{ song.urlname }}.flac'>flac</a>
                 </span>
             </li>
             {% endfor %}
@@ -41,7 +41,7 @@
         <p>No songs available.</p>
         {% endifnotequal %}
     </article>
-    <footer>
+    <!--footer>
         <p>
             Download full album in:
             <a href='mp3/{{ album.artist }} - {{ album.name }}.tar'>mp3</a>,
@@ -49,6 +49,6 @@
             or
             <a href='flac/{{ album.artist }} - {{ album.name }}.tar'>flac</a>.
         </p>
-    </footer>
+    </footer-->
 </body>
 </html>
