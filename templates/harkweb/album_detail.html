@@ -26,7 +26,7 @@
         </div>
         {% ifnotequal album.song_set.count 0 %}
         <ol>
-            {% for song in album.song_set.all %}
+            {% for song in album.songs_sorted_by_track %}
             <li>
                 <span class='songname'>{{ song.name }}</span>
                 <span class='formats'>

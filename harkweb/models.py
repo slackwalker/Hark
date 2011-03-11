@@ -1,3 +1,4 @@
+import re
 from django.db import models
 from hark.harkweb.templatetags.harkweb_extras import harkify
 
@@ -11,6 +12,7 @@ class Artist(models.Model):
 class Album(models.Model):
     name = models.CharField(max_length=128)
     artist = models.ForeignKey(Artist)
+    songregex = models.CharField(max_length=128)
 
     def __unicode__(self):
         return self.fullname()
@@ -20,6 +22,9 @@ class Album(models.Model):
 
     def urlpath(self):
         return '%s/%s/' % (harkify(self.artist), harkify(self.name))
+
+    def songs_sorted_by_track(self):
+        return self.song_set.all().order_by('track')
         
 
 class Song(models.Model):
@@ -31,5 +36,8 @@ class Song(models.Model):
         return self.name
 
     def urlname(self):
-        return '%02d_%s' % (self.track, harkify(self.name))
-
+        urlname = re.sub(
+            r'(\(\?P<track>.*?\))', '%02d' % (self.track),
+            self.album.songregex
+        )
+        return re.sub(r'(\(\?P<name>.*?\))', self.name, urlname)
