@@ -1,3 +1,4 @@
+import urllib
 from django.http import Http404
 from django.views.generic import list_detail
 from hark.harkweb.models import Artist, Album
@@ -27,7 +28,7 @@ def album_detail(request, artistname, albumname):
     try:
         album = Album.objects.get(
             name__iexact = albumname,
-            artist = artist
+            artist = artist,
         )
     except Album.DoesNotExist:
         raise Http404

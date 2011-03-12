@@ -1,4 +1,5 @@
 import re
+import urllib
 from django.db import models
 from hark.harkweb.templatetags.harkweb_extras import harkify
 
@@ -25,7 +26,6 @@ class Album(models.Model):
 
     def songs_sorted_by_track(self):
         return self.song_set.all().order_by('track')
-        
 
 class Song(models.Model):
     name = models.CharField(max_length=64)
@@ -40,4 +40,7 @@ class Song(models.Model):
             r'(\(\?P<track>.*?\))', '%02d' % (self.track),
             self.album.songregex
         )
-        return re.sub(r'(\(\?P<name>.*?\))', self.name, urlname)
+        urlname = re.sub(r'\\(.)', r'\1', urlname)
+        urlname = re.sub(r'(\(\?P<name>.*?\))', self.name, urlname)
+        urlname = urllib.quote(urlname.encode('utf-8'))
+        return urlname
